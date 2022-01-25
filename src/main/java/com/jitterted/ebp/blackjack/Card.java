@@ -8,14 +8,6 @@ public class Card {
     private final Suit suit;
     private final String rank;
 
-    // GOAL: get rid of this constructor
-    @Deprecated
-    public Card(String symbol, String rank) {
-        this.suit = Suit.from(symbol);
-        this.rank = rank;
-    }
-
-    // KEEP:
     public Card(Suit suit, String rank) {
         this.suit = suit;
         this.rank = rank;

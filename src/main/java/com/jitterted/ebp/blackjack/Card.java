@@ -14,7 +14,7 @@ public class Card {
     }
 
     public int rankValue() {
-        if ("JQK".contains(rank)) {
+        if ("JQK".contains(rank)) { // calculate face cards as 10
             return 10;
         } else if (rank.equals("A")) {
             return 1;

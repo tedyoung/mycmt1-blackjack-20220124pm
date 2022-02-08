@@ -22,6 +22,7 @@ public class Hand {
     }
 
     void drawCard(Deck deck) {
+        // enforce the invariant: cannot draw if busted
         cards.add(deck.draw());
     }
 
@@ -44,14 +45,36 @@ public class Hand {
         return handValue;
     }
 
-    Card faceUpCard() {
-        return cards.get(0);
-    }
-
     void display() {
         System.out.println(cards.stream()
                                 .map(Card::display)
                                 .collect(Collectors.joining(
                                        ansi().cursorUp(6).cursorRight(1).toString())));
+    }
+
+    // TODO: is there a special kind of hand for the Dealer?
+    Card faceUpCard() {
+        return cards.get(0);
+    }
+
+    // TODO: is there a special kind of hand for the Dealer?
+    boolean shouldDealerHit() {
+        return value() <= 16;
+    }
+
+    boolean isBusted() {
+        return value() > 21;
+    }
+
+    boolean pushes(Hand hand) {
+        // can't use this query, unless the player is done
+        // makes no sense if this hand is busted
+        return hand.value() == value();
+    }
+
+    boolean beats(Hand dealerHand) {
+        // can't use this query, unless the player is done
+        // makes no sense if this hand is busted
+        return value() > dealerHand.value();
     }
 }

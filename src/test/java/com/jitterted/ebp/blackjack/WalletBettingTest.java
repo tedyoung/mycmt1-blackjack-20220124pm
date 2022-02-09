@@ -37,11 +37,23 @@ public class WalletBettingTest {
                 .isTrue();
     }
 
+    @Test
+    public void betMoreThanBalanceThrowsException() {
+        Wallet wallet = createWalletWithInitialAmountOf(10);
+
+        assertThatThrownBy(() -> {
+            wallet.bet(11);
+        }).isInstanceOf(IllegalStateException.class);
+    }
+
     private Wallet createWalletWithInitialAmountOf(int amount) {
         Wallet wallet = new Wallet();
         wallet.addMoney(amount);
         return wallet;
     }
+
+    // wallet.canBet(11)
+    // wallet.balance() >= 11
 
 }
 
